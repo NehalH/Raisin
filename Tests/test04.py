@@ -67,11 +67,13 @@ def find_opt_bit_group(binary_data_l1, data_length_l1, min_bit_group, max_bit_gr
             opt_size = size
             opt_bit_group = i
 
+    return opt_bit_group, opt_size
 
 def find_size(frequencies, levels):
     size = 0
     for i in range(len(frequencies)):
         size += frequencies[i]*(levels[i]-1)
+
     return size    
 
 
@@ -82,7 +84,10 @@ data_length_l1 = 1000
 min_bit_group = 2
 max_bit_group = 8
 
-binary_data_l1 = generate_level1_binary_huffman_code(data_length_l1)
+for _ in range(10):
+    binary_data_l1 = generate_level1_binary_huffman_code(data_length_l1)
+    opt_bit_group = find_opt_bit_group(binary_data_l1, data_length_l1, min_bit_group, max_bit_group)
 
-print(frequencies)
-print(levels)
+    print(frequencies)
+    print(levels)
+    print(opt_bit_group)
