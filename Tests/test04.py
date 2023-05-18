@@ -62,18 +62,20 @@ def find_opt_bit_group(binary_data_l1, data_length_l1, min_bit_group, max_bit_gr
     for i in range(min_bit_group, max_bit_group+1):
         frequency_dict = count_frequency(i, binary_data_l1)
         frequencies, levels = create_huffman_tree(frequency_dict)
-        size = find_size(opt_size, frequencies, levels)
-        if opt_size > size:
+        size = find_size(frequencies, levels, opt_size)
+        
+        if opt_size >= size:
             opt_size = size
             opt_bit_group = i
+            #print(opt_size,'--', size, ' || ', opt_bit_group)
 
     return opt_bit_group, opt_size
 
-def find_size(frequencies, levels):
-    size = 0
+def find_size(frequencies, levels, opt_size):
+    size = opt_size
     for i in range(len(frequencies)):
         size += frequencies[i]*(levels[i]-1)
-
+        
     return size    
 
 
@@ -81,13 +83,26 @@ def find_size(frequencies, levels):
 ###############################################################################
 
 data_length_l1 = 1000
-min_bit_group = 2
+min_bit_group = 1
 max_bit_group = 8
 
-for _ in range(10):
-    binary_data_l1 = generate_level1_binary_huffman_code(data_length_l1)
-    opt_bit_group = find_opt_bit_group(binary_data_l1, data_length_l1, min_bit_group, max_bit_group)
+iterations = 2000
+success_count = 0
+fail_count = 0
 
-    print(frequencies)
-    print(levels)
-    print(opt_bit_group)
+for _ in range(iterations):
+    binary_data_l1 = generate_level1_binary_huffman_code(data_length_l1)
+    opt_bit_group, opt_size = find_opt_bit_group(binary_data_l1, data_length_l1, min_bit_group, max_bit_group)
+
+    #if opt_bit_group != 0:
+        #print(opt_bit_group, end=', ')
+    
+    if(opt_size<data_length_l1):
+        success_count += 1
+    else:
+        fail_count += 1
+
+print('SUCCESS : ',success_count)
+print('FAIL : ',fail_count)
+print('Success rate : ',success_count*100/iterations,'%')    
+print("END")
