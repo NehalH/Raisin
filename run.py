@@ -1,9 +1,15 @@
-import l1_huffman_encoder
-import l1_frequency_generator
+import encoder_huffman_l1
+import decoder_huffman_l1
 
 file_name = 'example.txt'
 
-character_frequencies = l1_frequency_generator.get_character_frequencies(file_name)
-encoded_data = l1_huffman_encoder.huffman_encode(character_frequencies)
+l1_bin_file_suffix = 'encoded_l1_'
+l2_bin_file_suffix = 'encoded_l2_'
 
-print("Encoded data:", encoded_data)
+l1_encoded_filename = l1_bin_file_suffix+file_name.split('.')[0]+'.bin'
+
+encoded_data, codes = encoder_huffman_l1.huffman_encode(file_name)
+decoded_data = decoder_huffman_l1.huffman_decode(encoded_data, codes)
+
+print(encoded_data)
+print(decoded_data)
