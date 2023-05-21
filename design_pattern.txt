@@ -1,0 +1,76 @@
+extraxt_text (path):
+	return string
+
+huffman_L1 (string):
+	return binary_string, codes
+
+decode_L1 (bin_str):
+	return string
+
+huffman_L2 (bin_str):
+	return bin_str_L2, codes_L2, bit_group
+
+decode_L2 (bin_str_L2, codes_L2):
+	return bin_str_L1
+
+pack (path, encoded_data, codes, level):
+	return string
+
+unpack (string):
+	return encoded_data, codes, level
+
+write_to_compressed_file (string):
+	return boolean
+
+read_from_compressed_file (path):
+	return string
+
+write_to_file (string):
+	return boolean
+
+compress (path):
+	extraxt_text (path)
+	huffman_L1 (string)
+	huffman_L2 (string)
+	if len( huffman_L1 (string) ) > ( huffman_L2 (string) ):
+		#pack and write L2
+		pack (path, encoded_data, codes, level)
+		write_to_compressed_file (string)
+	else:
+		#pack and write L2
+		pack (path, encoded_data, codes, level)
+		write_to_compressed_file (string)
+	return compresses_path
+
+decompress (path):
+	read_from_compressed_file (path)
+	unpack (path)
+	if level = 2:
+		decode_L2 (bin_str_L2, codes_L2)
+		decode_L1 (bin_str)
+	else:
+		decode_L1 (bin_str)
+	write_to_file (string)
+
+
+
+modules/functions:
+	level_1
+		huffman_L1 (string)
+		decode_L1 (bin_str)
+	level_2
+		huffman_L2 (bin_str)
+		decode_L2 (bin_str_L2, codes_L2)
+	pack_unpack
+		pack (path, encoded_data, codes, level)
+		unpack (string)
+	read_write
+		write_to_compressed_file (string)
+		read_from_compressed_file (path)
+		read_from_file (path)
+		write_to_file (string)
+	size_manipulation
+		compress (path)
+		decompress (path)
+	main
+		main()
