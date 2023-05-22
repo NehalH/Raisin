@@ -17,5 +17,7 @@ Raisin is a command-line tool designed to compress text files using layered Huff
    git clone https://github.com/your-username/raisin.git
 
 2. Navigate to the project directory:
+
+   ```shell
    cd raisin
 
