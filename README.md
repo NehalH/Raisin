@@ -19,7 +19,7 @@ Raisin is a command-line tool designed to compress text files using layered Huff
 2. Navigate to the project directory:
 
    ```shell
-   cd raisin
+   cd Raisin
    ```
 3. Install the required dependencies:
    ```shell
@@ -54,6 +54,16 @@ shell
 Copy code
 python raisin.py decompress example.bin example_decompressed.txt
 -->
+
+### Modules/Functions:
+
+- **level_1**: Contains functions for Huffman encoding (`huffman_L1`) and decoding (`decode_L1`) at level 1.
+- **level_2**: Contains functions for Huffman encoding (`huffman_L2`) and decoding (`decode_L2`) at level 2.
+- **pack_unpack**: Contains functions for packing (`pack`) and unpacking (`unpack`) data for compression and decompression.
+- **read_write**: Contains functions for writing the compressed data to a file (`write_to_compressed_file`), reading from a compressed file (`read_from_compressed_file`), reading from a regular file (`read_from_file`), and writing to a regular file (`write_to_file`).
+- **size_manipulation**: Contains the main compression (`compress`) and decompression (`decompress`) functions, which utilize the functions from other modules to perform the necessary operations.
+- **main**: Contains the main function (`main()`) that serves as the entry point for the program.
+
 
 ## Contributing
 
