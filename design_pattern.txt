@@ -13,19 +13,19 @@ huffman_L2 (bin_str):
 decode_L2 (bin_str_L2, codes_L2):
 	return bin_str_L1
 
-pack (path, encoded_data, codes, level):
-	return string
+pack (level, codes_l1, code_l2, encoded_data):
+	return dictionary
 
-unpack (string):
-	return encoded_data, codes, level
+unpack (dictionary):
+	return level, codes_l1, code_l2, encoded_data
 
-write_to_compressed_file (string):
+write_to_compressed_file (path, dictionary):
 	return boolean
 
 read_from_compressed_file (path):
 	return string
 
-write_to_file (string):
+write_to_file (path, string):
 	return boolean
 
 compress (path):
@@ -62,14 +62,14 @@ modules/functions:
 		huffman_L2 (bin_str)
 		decode_L2 (bin_str_L2, codes_L2)
 	pack_unpack
-		pack (path, encoded_data, codes, level)
-		unpack (string)
+		pack (level, codes_l1, code_l2, encoded_data)
+		unpack (dictionary)
 	read_write
-		write_to_compressed_file (string)
+		write_to_compressed_file (path, dictionary)
 		read_from_compressed_file (path)
 		read_from_file (path)
-		write_to_file (string)
-	size_manipulation
+		write_to_file (path, string)
+	manipulation
 		compress (path)
 		decompress (path)
 	main
