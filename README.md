@@ -64,11 +64,9 @@ Contributions to Raisin are welcome! If you have any bug reports, feature reques
 
 Wondering why this compression tool is named "Raisin" ?
 
-Well, imagine a bunch of grapes sitting on your kitchen counter. They're plump, colorful, and bursting with flavor. Now, what happens when those grapes get a little too comfortable and decide to stick around a bit longer? They transform into raisins!
+Just like plump grapes transform into tiny raisins without loosing their nutrition, Raisin shrinks your data while preserving the real information. It's compression without compromise!
 
-Just like those grapes, our software has the magical power to shrink the size of your data. But fear not! We're not here to take away any of its nutritious goodness. Raisin works its compression magic while keeping every single bit intact and retrievable.
-
-So, think of Raisin as your data's personal nutritionist. It takes your files, gives them a little squeeze, and voilà! They become compact, travel-friendly, and ready to be stored or transmitted with ease.
+So, Raisin takes your files, gives them a little squeeze, and voilà! They become compact, travel-friendly, and ready to be stored or transmitted with ease.
 
 Next time you use Raisin, remember the grape-to-raisin transformation. It's a small change that makes a big difference!
 
