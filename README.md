@@ -14,16 +14,16 @@ Raisin is a command-line tool designed to compress text files using layered Huff
 1. Clone the repository:
 
    ```shell
-      git clone https://github.com/your-username/raisin.git
+   git clone https://github.com/your-username/raisin.git
    ```
 2. Navigate to the project directory:
 
    ```shell
-      cd raisin
+   cd raisin
    ```
 3. Install the required dependencies:
    ```shell
-      pip install -r requirements.txt
+   pip install -r requirements.txt
    ```
 <!--
 ## Usage
