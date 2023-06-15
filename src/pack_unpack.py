@@ -4,7 +4,7 @@
 def dictionary_to_string(dictionary):
     pairs = []
     for key, value in dictionary.items():
-        pairs.append(f"'{key}':'{value}'")
+        pairs.append(f"'{key}'::'{value}'")
     return '{' + ',,'.join(pairs) + '}'
 
 def data_padding(binary_str):
@@ -38,8 +38,8 @@ def string_to_dictionary(string):
     key_value_pairs = string.split(',,')
 
     for pair in key_value_pairs:
-        if ':' in pair:
-            key, value = pair.split(':')
+        if '::' in pair:
+            key, value = pair.split('::')
             key = key.strip().strip('\'')
             value = value.strip().strip('\'')
             dictionary[key] = value
