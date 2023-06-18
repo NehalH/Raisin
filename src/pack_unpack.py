@@ -4,8 +4,8 @@
 def dictionary_to_string(dictionary):
     pairs = []
     for key, value in dictionary.items():
-        pairs.append(f"'{key}'::'{value}'")
-    return '{' + ',,'.join(pairs) + '}'
+        pairs.append(f"'{key}'::{value}")
+    return ',,'.join(pairs)
 
 def data_padding(binary_str):
     padding = 8 - len(binary_str) % 8
@@ -40,11 +40,22 @@ def string_to_dictionary(string):
     for pair in key_value_pairs:
         if '::' in pair:
             key, value = pair.split('::')
-            key = key.strip().strip('\'')
+            if key == "'''":
+                key = "'"
+            else:
+                key = key.strip().strip('\'')
             value = value.strip().strip('\'')
             dictionary[key] = value
 
     return dictionary
+
+def chars_to_bits(char_string):
+    bit_string = ''
+    for char in char_string:
+        char_value = ord(char)
+        bits = bin(char_value)[2:].zfill(8)
+        bit_string += bits
+    return bit_string
 
 
 def unpack(packed_data):
@@ -94,7 +105,7 @@ def unpack(packed_data):
     semi_packed_data = semi_packed_data[l1_codes_len:]
     l2_codes = semi_packed_data[:l2_codes_len]
     semi_packed_data = semi_packed_data[l2_codes_len:]
-    encoded_data = semi_packed_data
+    encoded_data = chars_to_bits(semi_packed_data)
 
     l1_codes = string_to_dictionary(l1_codes)
     l2_codes = string_to_dictionary(l2_codes)

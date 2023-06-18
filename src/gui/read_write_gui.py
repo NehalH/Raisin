@@ -8,6 +8,7 @@ def open_directory_dialog(initial_directory):
     file_dialog.setFileMode(QFileDialog.DirectoryOnly)
     file_dialog.setOption(QFileDialog.ShowDirsOnly, True)
     file_dialog.setDirectory(initial_directory)
+    file_dialog.setWindowTitle("Select destination directory")
     
     if file_dialog.exec_() == QFileDialog.Accepted:
         selected_directory = file_dialog.selectedFiles()[0]
@@ -19,11 +20,27 @@ def open_file_dialog():
     app = QApplication([])
     file_dialog = QFileDialog()
     file_dialog.setFileMode(QFileDialog.AnyFile)
+    file_dialog.setWindowTitle("Select file")
 
     if file_dialog.exec_() == QFileDialog.Accepted:
         selected_files = file_dialog.selectedFiles()
         if len(selected_files) > 0:
             selected_file = selected_files[0]
             return selected_file
+
+    return None
+
+def open_raisin_file_dialog():
+    app = QApplication([])
+    file_dialog = QFileDialog()
+    file_dialog.setFileMode(QFileDialog.ExistingFile)
+    file_dialog.setWindowTitle("Select compressed file")
+    file_dialog.setNameFilter("Raisin Files (*.raisin)")
+
+    if file_dialog.exec_() == QFileDialog.Accepted:
+        selected_files = file_dialog.selectedFiles()
+        if len(selected_files) > 0:
+            file_path = selected_files[0]
+            return file_path
 
     return None
