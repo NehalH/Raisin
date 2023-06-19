@@ -63,5 +63,22 @@ def decode_L1(bin_str, codes_dict):
             decoded_str += reversed_codes_dict[curr_code]
             curr_code = ""
 
+    # Temporary patch: replace \xe2\x80\x99 and \xe2\x80\x98 with placeholders
+    decoded_str = decoded_str.replace('\\xe2\\x80\\x99', '<ignore | RIGHT SINGLE QUOTATION MARK>')
+    decoded_str = decoded_str.replace('\\xe2\\x80\\x98', '<ignore | LEFT SINGLE QUOTATION MARK>')
+
+    # Accommodate for escape characters
+    decoded_str = decoded_str.encode('utf-8').decode('unicode_escape')
+
+    # Temporary patch: replace \xe2\x80\x99 and \xe2\x80\x98 with placeholders
+    decoded_str = decoded_str.replace('<ignore | RIGHT SINGLE QUOTATION MARK>', '’')
+    decoded_str = decoded_str.replace('<ignore | LEFT SINGLE QUOTATION MARK>', '‘')
+
+    # Temporary patch: remove last 3 unwanted chars
+    decoded_str = decoded_str[:-3]
+
+    # Temporary patch: remove first 2 unwanted chars
+    decoded_str = decoded_str[2:]
+
     return decoded_str
     
