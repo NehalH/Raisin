@@ -4,7 +4,7 @@ extraxt_text (path):
 huffman_L1 (string):
 	return binary_string, codes
 
-decode_L1 (bin_str):
+decode_L1 (bin_str, codes_L1):
 	return string
 
 huffman_L2 (bin_str):
@@ -54,10 +54,10 @@ decompress (path):
 
 
 
-modules/functions:
+modules/methods:
 	level_1
 		huffman_L1 (string)
-		decode_L1 (bin_str)
+		decode_L1 (bin_str, codes_L1)
 	level_2
 		huffman_L2 (bin_str)
 		decode_L2 (bin_str_L2, codes_L2)

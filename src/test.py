@@ -20,15 +20,11 @@ def decompress():
     data, path = read_write.read_from_raisin_file()
 
     level, l1_codes, l2_codes, encoded_data = unpack(data)
-    print(level)
-    print(l1_codes)
-    print(l2_codes)
     if level == 2:
         decoded_l2 = level_2.decode_L2(encoded_data, l2_codes)
         decoded_l1 = level_1.decode_L1(decoded_l2, l1_codes)
     else:
         decoded_l1 = level_1.decode_L1(encoded_data, l1_codes)
-    print('Decoded L2: '+decoded_l2)
     print('Decoded L1: '+decoded_l1)
 
     read_write.write_to_file(path, decoded_l1)
