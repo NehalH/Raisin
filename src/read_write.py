@@ -6,7 +6,7 @@ def write_to_raisin_file(path, packed_data):
     default_dir = os.path.dirname(path)
     dest_dir = read_write_gui.open_directory_dialog(default_dir)
     if dest_dir is None:
-        print('Dialog cancelled')
+        print('Operation cancelled')
         return False
 
     dest_path = os.path.join(dest_dir, os.path.basename(path) + '.raisin')
@@ -22,6 +22,9 @@ def write_to_raisin_file(path, packed_data):
 
 def read_from_file():
     file_path = read_write_gui.open_file_dialog()
+    if file_path is None:
+        print('Operation cancelled')
+        return False
     try:
         with open(file_path, 'rb') as file:
             data = file.read()
@@ -51,7 +54,7 @@ def write_to_file(path, data):
     filename = os.path.basename(path)
     dest_dir = read_write_gui.open_directory_dialog(default_dir)
     if dest_dir is None:
-        print('Dialog cancelled')
+        print('Operation cancelled')
         return False
 
     dest_path = os.path.join(dest_dir, os.path.splitext(filename)[0])

@@ -3,17 +3,19 @@ import level_2
 from pack_unpack import pack
 from pack_unpack import unpack
 import read_write
+from compression_stats import print_stats
 
 def compress():
-	data, path = read_write.read_from_file()
+    data, path = read_write.read_from_file()
 
-	encoded_data_l1, codes_l1 = level_1.huffman_L1(data)
-	encoded_data_l2, codes_l2 = level_2.huffman_L2(encoded_data_l1, 2)
+    encoded_data_l1, codes_l1 = level_1.huffman_L1(data)
+    encoded_data_l2, codes_l2 = level_2.huffman_L2(encoded_data_l1, 2)
 
-	packed = pack(2, codes_l1, codes_l2, encoded_data_l2)
+    packed_data = pack(2, codes_l1, codes_l2, encoded_data_l2)
 
+    read_write.write_to_raisin_file(path, packed_data)
+    print_stats(data, encoded_data_l1, encoded_data_l2, packed_data)
 
-	read_write.write_to_raisin_file(path, packed)
 
 
 def decompress():
@@ -34,11 +36,3 @@ def decompress():
 opt = int(input('1. COMPRESS\n2. DECOMPRESS\n'))
 if opt == 1: compress()
 else: decompress()
-
-# with open("N:/Box/WorkSpace/Projects/Raisin/Raisin/test_subject/example_short.txt", 'r') as file:
-#             original_data = file.read()
-
-# with open("C:/Users/ARAVINDA/Desktop/example_short.txt", 'r') as file:
-#             decompressed_data = file.read()
-# if original_data == decompressed_data: print('SUCCESSSSSSSSS')
-# else: print('FAIL')
