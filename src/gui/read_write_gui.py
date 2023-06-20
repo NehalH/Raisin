@@ -1,6 +1,10 @@
 from PyQt5.QtWidgets import QApplication, QFileDialog
+import os
 
-
+# Disable QT_DEVICE_PIXEL_RATIO warning
+os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+os.environ["QT_SCREEN_SCALE_FACTORS"] = "1"
+os.environ["QT_SCALE_FACTOR"] = "1"
 
 def open_directory_dialog(initial_directory):
     app = QApplication([])

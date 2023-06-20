@@ -1,3 +1,4 @@
+from tqdm import tqdm
 
 # ENCODER
 
@@ -45,9 +46,18 @@ def huffman_L2(bin_str, n):
     traverse_huffman_tree(root, "", codes_dict)
 
     # Encode the input binary string using Huffman codes
-    encoded_str = "".join(codes_dict[bin_str[i:i+n]] for i in range(0, len(bin_str), n))
+    encoded_str = ""
+    progress_bar = tqdm(total=len(bin_str), desc="Compressing (Level 2)")
+
+    for i in range(0, len(bin_str), n):
+        chunk = bin_str[i:i+n]
+        encoded_str += codes_dict[chunk]
+        progress_bar.update(len(chunk))
+
+    progress_bar.close()
 
     return encoded_str, codes_dict
+
 
 
 # DECODER
@@ -58,11 +68,16 @@ def decode_L2(bin_str, codes_dict):
     curr_code = ""
     i = 0
 
+    progress_bar = tqdm(total=len(bin_str), desc="Decompressing (Level 1)")
+
     while i < len(bin_str):
         curr_code += bin_str[i]
         if curr_code in reversed_codes_dict:
             decoded_str += reversed_codes_dict[curr_code]
             curr_code = ""
         i += 1
+        progress_bar.update()
+
+    progress_bar.close()
 
     return decoded_str
