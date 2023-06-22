@@ -13,22 +13,21 @@ def data_padding(binary_str):
         binary_str += "0"
     return padding, binary_str
 
-def bits_to_chars(bit_string):
-    char_string = ''
+def bits_to_byte_array(bit_string):
+    byte_array = bytearray()
     for i in range(0, len(bit_string), 8):
-        bits = bit_string[i:i+8]
-        char = chr(int(bits, 2))
-        char_string += char
-    return char_string
+        byte = bit_string[i:i+8]
+        byte_array.append(int(byte, 2))
+    return byte_array
 
 def pack(level, codes_l1, codes_l2, encoded_data):
     padding, encoded_data = data_padding(encoded_data)
-    encoded_data = bits_to_chars(encoded_data)
+    encoded_data = bits_to_byte_array(encoded_data)
     l1_codes_string = dictionary_to_string(codes_l1)
     l2_codes_string = dictionary_to_string(codes_l2)
 
-    semi_packed_data = l1_codes_string + l2_codes_string + encoded_data
-    packed_data = str(level) + '|' + str(padding) + '|' + str(len(l1_codes_string)) + '|' + str(len(l2_codes_string)) + '|' + semi_packed_data
+    meta_data = str(level) + '|' + str(padding) + '|' + str(len(l1_codes_string)) + '|' + str(len(l2_codes_string)) + '|' + l1_codes_string + l2_codes_string
+    packed_data =  bytes(meta_data, 'utf-8') + encoded_data
     return packed_data
 
 # UNPACK

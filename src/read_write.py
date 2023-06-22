@@ -13,7 +13,7 @@ def write_to_raisin_file(path, packed_data):
 
     try:
         with open(dest_path, 'wb') as file:
-            file.write(packed_data.encode('utf-8'))
+            file.write(packed_data)
         return True
     except Exception as e:
         print('Failed to Create File: ', str(e))
@@ -26,7 +26,7 @@ def read_from_file():
         print('Operation cancelled')
         return False
     try:
-        with open(file_path, 'rb') as file:
+        with open(file_path, 'r') as file:
             data = file.read()
         return str(data), file_path
     except FileNotFoundError:
@@ -39,7 +39,7 @@ def read_from_raisin_file():
     file_path = read_write_gui.open_raisin_file_dialog()
     try:
         with open(file_path, 'rb') as file:
-            data = file.read().decode('utf-8')
+            data = file.read()
         return data, file_path
     except FileNotFoundError:
         print(f"File '{file_path}' not found.")
@@ -61,7 +61,7 @@ def write_to_file(path, data):
 
     try:
         with open(dest_path, 'wb') as file:
-            file.write(data.encode('utf-8'))
+            file.write(data)
         print('File created:', dest_path)
         return dest_path
     except Exception as e:

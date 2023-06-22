@@ -3,7 +3,7 @@ import level_2
 from pack_unpack import pack
 from pack_unpack import unpack
 import read_write
-from compression_stats import print_stats
+import compression_stats
 
 def compress():
     data, path = read_write.read_from_file()
@@ -14,7 +14,7 @@ def compress():
     packed_data = pack(2, codes_l1, codes_l2, encoded_data_l2)
 
     read_write.write_to_raisin_file(path, packed_data)
-    print_stats(len(data), (encoded_data_l1_len//8)+codes_l1_len, (encoded_data_l2_len//8)+codes_l1_len+codes_l2_len, len(packed_data))
+    compression_stats.print_stats(len(data), (encoded_data_l1_len//8)+codes_l1_len, (encoded_data_l2_len//8)+codes_l1_len+codes_l2_len, len(packed_data))
 
 
 
