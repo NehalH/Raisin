@@ -60,7 +60,7 @@ def write_to_file(path, data):
     dest_path = os.path.join(dest_dir, os.path.splitext(filename)[0])
 
     try:
-        with open(dest_path, 'wb') as file:
+        with open(dest_path, 'w') as file:
             file.write(data)
         print('File created:', dest_path)
         return dest_path
