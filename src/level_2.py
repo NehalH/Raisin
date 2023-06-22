@@ -34,6 +34,12 @@ def traverse_huffman_tree(root, code, codes_dict):
         traverse_huffman_tree(root.left, code + "0", codes_dict)
         traverse_huffman_tree(root.right, code + "1", codes_dict)
 
+def dictionary_to_string(dictionary):
+    pairs = []
+    for key, value in dictionary.items():
+        pairs.append(f"'{key}'::{value}")
+    return ',,'.join(pairs)
+
 def huffman_L2(bin_str, n):
     # Calculate character frequencies by considering n characters at a time
     freq_table = collections.Counter(bin_str[i:i+n] for i in range(0, len(bin_str), n))
@@ -56,7 +62,7 @@ def huffman_L2(bin_str, n):
 
     progress_bar.close()
 
-    return encoded_str, codes_dict
+    return encoded_str, codes_dict, len(encoded_str), len(dictionary_to_string(codes_dict))
 
 
 

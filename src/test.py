@@ -8,13 +8,13 @@ from compression_stats import print_stats
 def compress():
     data, path = read_write.read_from_file()
 
-    encoded_data_l1, codes_l1 = level_1.huffman_L1(data)
-    encoded_data_l2, codes_l2 = level_2.huffman_L2(encoded_data_l1, 2)
+    encoded_data_l1, codes_l1, encoded_data_l1_len, codes_l1_len = level_1.huffman_L1(data)
+    encoded_data_l2, codes_l2, encoded_data_l2_len, codes_l2_len = level_2.huffman_L2(encoded_data_l1, 2)
 
     packed_data = pack(2, codes_l1, codes_l2, encoded_data_l2)
 
     read_write.write_to_raisin_file(path, packed_data)
-    print_stats(data, encoded_data_l1, encoded_data_l2, packed_data)
+    print_stats(len(data), (encoded_data_l1_len//8)+codes_l1_len, (encoded_data_l2_len//8)+codes_l1_len+codes_l2_len, len(packed_data))
 
 
 

@@ -27,11 +27,7 @@ def calculate_efficiency(original_size, compressed_size):
 
     return (compressed_size / original_size) * 100
 
-def print_stats(original_data, l1_data, l2_data, packed_data):
-    original_data_size = calculate_original_size(original_data)
-    l1_data_size = calculate_original_size(l1_data)
-    l2_data_size = calculate_original_size(l2_data)
-    packed_data_size = calculate_original_size(packed_data)
+def print_stats(original_data_size, l1_packed_data_size, l2_packed_data_size, final_packed_data_size):
 
     print('\nCOMPRESSION STATISTICS:')
     table = Table(show_lines=False)
@@ -39,9 +35,9 @@ def print_stats(original_data, l1_data, l2_data, packed_data):
     table.add_column("Size", justify="right", style="green")
 
     table.add_row("Original Data", str(original_data_size) + " B")
-    table.add_row("L1 Compressed Data", str(l1_data_size) + " B")
-    table.add_row("L2 Compressed Data", str(l2_data_size) + " B")
-    table.add_row("Packed Data", str(packed_data_size) + " B")
+    table.add_row("L1 Compressed Data", str(l1_packed_data_size) + " B")
+    table.add_row("L2 Compressed Data", str(l2_packed_data_size) + " B")
+    table.add_row("Packed Data", str(final_packed_data_size) + " B")
 
     console = Console()
     console.print(table)
