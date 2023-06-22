@@ -3,6 +3,7 @@ from tqdm import tqdm
 # ENCODER
 
 import collections
+import heapq
 
 class TreeNode:
     def __init__(self, chars, freq):
@@ -12,20 +13,28 @@ class TreeNode:
         self.right = None
 
 def build_huffman_tree(freq_table):
-    queue = collections.deque(sorted(freq_table.items(), key=lambda x: x[1]))
+    priority_queue = []
 
-    while len(queue) > 1:
-        chars1, freq1 = queue.popleft()
-        chars2, freq2 = queue.popleft()
+    # Create tuples with negative frequencies to sort in reverse order
+    for chars, freq in freq_table.items():
+        heapq.heappush(priority_queue, (freq, TreeNode(chars, freq)))
 
-        internal_node = TreeNode(None, freq1 + freq2)
-        internal_node.left = chars1 if isinstance(chars1, TreeNode) else TreeNode(chars1, freq1)
-        internal_node.right = chars2 if isinstance(chars2, TreeNode) else TreeNode(chars2, freq2)
+    while len(priority_queue) > 1:
+        # Pop two nodes with the highest frequencies
+        neg_freq1, node1 = heapq.heappop(priority_queue)
+        neg_freq2, node2 = heapq.heappop(priority_queue)
 
-        queue.append((internal_node, freq1 + freq2))
-        queue = collections.deque(sorted(queue, key=lambda x: x[1]))
+        # Create a new internal node with the sum of frequencies
+        internal_node = TreeNode(None, node1.freq + node2.freq)
+        internal_node.left = node1
+        internal_node.right = node2
 
-    return queue[0][0]
+        # Push the new internal node back to the priority queue
+        heapq.heappush(priority_queue, (-internal_node.freq, internal_node))
+
+    # Return the root node of the Huffman tree
+    return priority_queue[0][1]
+
 
 def traverse_huffman_tree(root, code, codes_dict):
     if root.chars is not None:
@@ -43,7 +52,7 @@ def dictionary_to_string(dictionary):
 def huffman_L2(bin_str, n):
     # Calculate character frequencies by considering n characters at a time
     freq_table = collections.Counter(bin_str[i:i+n] for i in range(0, len(bin_str), n))
-
+    print('\n\n\n',freq_table,'\n\n\n')
     # Build Huffman tree
     root = build_huffman_tree(freq_table)
 
@@ -61,6 +70,8 @@ def huffman_L2(bin_str, n):
         progress_bar.update(len(chunk))
 
     progress_bar.close()
+
+    print('\n\n\n',codes_dict,'\n\n\n')
 
     return encoded_str, codes_dict, len(encoded_str), len(dictionary_to_string(codes_dict))
 

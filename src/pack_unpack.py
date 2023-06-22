@@ -28,7 +28,7 @@ def pack(level, codes_l1, codes_l2, encoded_data):
 
     meta_data = str(level) + '|' + str(padding) + '|' + str(len(l1_codes_string)) + '|' + str(len(l2_codes_string)) + '|' + l1_codes_string + l2_codes_string
     packed_data =  bytes(meta_data, 'utf-8') + encoded_data
-    print(encoded_data)
+    
     return packed_data
 
 # UNPACK
@@ -122,9 +122,6 @@ def unpack(packed_data):
 
     l1_codes = string_to_dictionary(l1_codes)
     l2_codes = string_to_dictionary(l2_codes)
-
-    #print(level, '\n\n', l1_codes, '\n\n', l2_codes, '\n\n', encoded_data)
-    print(encoded_data)
 
     return level, l1_codes, l2_codes, encoded_data
 

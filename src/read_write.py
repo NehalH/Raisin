@@ -26,8 +26,8 @@ def read_from_file():
         print('Operation cancelled')
         return False
     try:
-        with open(file_path, 'r') as file:
-            data = file.read()
+        with open(file_path, 'rb') as file:
+            data = file.read().decode('utf-8')
         return str(data), file_path
     except FileNotFoundError:
         print(f"File '{file_path}' not found.")
