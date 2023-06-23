@@ -52,7 +52,7 @@ def dictionary_to_string(dictionary):
 def huffman_L2(bin_str, n):
     # Calculate character frequencies by considering n characters at a time
     freq_table = collections.Counter(bin_str[i:i+n] for i in range(0, len(bin_str), n))
-    print('\n\n\n',freq_table,'\n\n\n')
+
     # Build Huffman tree
     root = build_huffman_tree(freq_table)
 
@@ -71,7 +71,7 @@ def huffman_L2(bin_str, n):
 
     progress_bar.close()
 
-    print('\n\n\n',codes_dict,'\n\n\n')
+
 
     return encoded_str, codes_dict, len(encoded_str), len(dictionary_to_string(codes_dict))
 
