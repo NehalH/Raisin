@@ -12,6 +12,9 @@ class TreeNode:
         self.left = None
         self.right = None
 
+    def __lt__(self, other):
+        return self.freq < other.freq
+
 def build_huffman_tree(freq_table):
     priority_queue = []
 
@@ -71,8 +74,6 @@ def huffman_L2(bin_str, n):
 
     progress_bar.close()
 
-
-
     return encoded_str, codes_dict, len(encoded_str), len(dictionary_to_string(codes_dict))
 
 
@@ -85,7 +86,7 @@ def decode_L2(bin_str, codes_dict):
     curr_code = ""
     i = 0
 
-    progress_bar = tqdm(total=len(bin_str), desc="Decompressing (Level 1)")
+    progress_bar = tqdm(total=len(bin_str), desc="Decompressing (Level 2)")
 
     while i < len(bin_str):
         curr_code += bin_str[i]

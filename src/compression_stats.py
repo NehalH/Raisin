@@ -31,13 +31,15 @@ def print_stats(original_data_size, l1_packed_data_size, l2_packed_data_size, fi
 
     print('\nCOMPRESSION STATISTICS:')
     table = Table(show_lines=False)
-    table.add_column("Data Type", style="cyan", width=20)
+    table.add_column("Data", style="cyan", width=20)
     table.add_column("Size", justify="right", style="green")
 
-    table.add_row("Original Data", str(original_data_size) + " B")
-    table.add_row("L1 Compressed Data", str(l1_packed_data_size) + " B")
-    table.add_row("L2 Compressed Data", str(l2_packed_data_size) + " B")
-    table.add_row("Packed Data", str(final_packed_data_size) + " B")
+    table.add_row("Original File", str(original_data_size) + " B")
+    table.add_row("Compressed File", str(final_packed_data_size) + " B")
+    table.add_row("Size Difference", str(round(original_data_size - final_packed_data_size, 3)) + " B")
+    table.add_row("Compression Ratio", str(round(calculate_compression_ratio(original_data_size, final_packed_data_size), 3)) + str(" "))
+    table.add_row("Compression %", str(round(calculate_compression_percentage(original_data_size, final_packed_data_size), 3)) + " %")
+    table.add_row("Efficiency", str(round(calculate_efficiency(original_data_size, final_packed_data_size),3)) + " ")
 
     console = Console()
     console.print(table)
