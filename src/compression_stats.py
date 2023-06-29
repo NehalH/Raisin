@@ -37,7 +37,7 @@ def print_stats(original_data_size, l1_packed_data_size, l2_packed_data_size, fi
     table.add_row("Original File", str(original_data_size) + " B")
     table.add_row("Compressed File", str(final_packed_data_size) + " B")
     table.add_row("Size Difference", str(round(original_data_size - final_packed_data_size, 3)) + " B")
-    table.add_row("Compression Ratio", str(round(calculate_compression_ratio(original_data_size, final_packed_data_size), 3)) + str(" "))
+    table.add_row("Compression Ratio", str(round(calculate_compression_ratio(original_data_size, final_packed_data_size), 3)) + " ")
     table.add_row("Compression %", str(round(calculate_compression_percentage(original_data_size, final_packed_data_size), 3)) + " %")
     table.add_row("Efficiency", str(round(calculate_efficiency(original_data_size, final_packed_data_size),3)) + " ")
 

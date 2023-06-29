@@ -10,14 +10,19 @@ def compress():
     data, path = read_write.read_from_file()
 
     encoded_data_l1, codes_l1, encoded_data_l1_len, codes_l1_len = level_1.huffman_L1(data)
-    encoded_data_l2, codes_l2, encoded_data_l2_len, codes_l2_len = level_2.huffman_L2(encoded_data_l1, bit_group)
+    if(len(data)<(encoded_data_l1_len+codes_l1_len)):
+        print("\nCOMPRESSION ABORTED !\nCould not compress", path)
+        print("The size of .raisin file will be larger than original file")
+        print("Please ensure the size of file is not too small\n\n")
+    else:
+        encoded_data_l2, codes_l2, encoded_data_l2_len, codes_l2_len = level_2.huffman_L2(encoded_data_l1, bit_group)
 
-    packed_data = pack(2, codes_l1, codes_l2, encoded_data_l2)
+        packed_data = pack(2, codes_l1, codes_l2, encoded_data_l2)
 
-    read_write.write_to_raisin_file(path, packed_data)
+        read_write.write_to_raisin_file(path, packed_data)
 
-    # Print statistics
-    compression_stats.print_stats(len(data), (encoded_data_l1_len//8)+codes_l1_len, (encoded_data_l2_len//8)+codes_l1_len+codes_l2_len, len(packed_data))
+        # Print statistics
+        compression_stats.print_stats(len(data), (encoded_data_l1_len//8)+codes_l1_len, (encoded_data_l2_len//8)+codes_l1_len+codes_l2_len, len(packed_data))
 
 
 
