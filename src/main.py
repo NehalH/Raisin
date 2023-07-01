@@ -10,7 +10,7 @@ def compress():
     data, path = read_write.read_from_file()
 
     encoded_data_l1, codes_l1, encoded_data_l1_len, codes_l1_len = level_1.huffman_L1(data)
-    if(len(data)<(encoded_data_l1_len+codes_l1_len)):
+    if(len(data)<((encoded_data_l1_len//8)+codes_l1_len)):
         print("\nCOMPRESSION ABORTED !\nCould not compress", path)
         print("The size of .raisin file will be larger than original file")
         print("Please ensure the size of file is not too small\n\n")
