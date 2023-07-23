@@ -1,3 +1,4 @@
+import sys
 import level_1
 import level_2
 from pack_unpack import pack
@@ -40,6 +41,18 @@ def decompress():
     read_write.write_to_file(path, decoded_l1)
 
 
-opt = int(input('1. COMPRESS\n2. DECOMPRESS\n'))
-if opt == 1: compress()
-else: decompress()
+# Check the command-line arguments
+if len(sys.argv) < 2:
+    print("Invalid command")
+    sys.exit(1)
+
+# Get the command from the command-line argument
+command = sys.argv[1]
+
+# Execute the corresponding function based on the command
+if command == "compress":
+    compress()
+elif command == "decompress":
+    decompress()
+else:
+    print("Invalid command")
